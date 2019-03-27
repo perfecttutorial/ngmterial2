@@ -1,7 +1,6 @@
 import { Component, OnInit,ViewChild, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { NgForm } from '@angular/forms';
 import { MainContent } from 'src/app/model/maincontent.model';
+import { MainContentService } from './maincontent.service';
 
 
 @Component({
@@ -14,20 +13,34 @@ import { MainContent } from 'src/app/model/maincontent.model';
 export class MaincontentComponent implements OnInit {
 
   response :any;
+  errormsg:any;
   mainCont : MainContent = {
     selectDT:null,
     state:null
    
   }
-  constructor(private httpClient: HttpClient) {
+  constructor(private _maincontentserrvice:MainContentService) {}
 
-  }
+  
   ngOnInit() {
-    let obs = this.httpClient.get('assets/customer.json');
+    this._maincontentserrvice.getDeviceTypeList().
+    subscribe(
+      data=> {
+   // console.log(res+"-------------- saddsdsad")
+    console.log("this.response  "+JSON.stringify(data));
+    this.response = data,
+    error => {
+      console.log("this.response  "+JSON.stringify(error));
+    this.errormsg = error
+    }
+  }
+    
+  
+   /*  let obs = this.httpClient.get('assets/customer.json');
     obs.subscribe((res)=> {
       console.log(res+"-------------- saddsdsad")
       this.response = res;
-    })
+    }) */
   }
 
  /*  onSubmit(mcForm:NgForm):void { 

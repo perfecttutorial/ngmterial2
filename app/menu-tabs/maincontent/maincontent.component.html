@@ -4,8 +4,11 @@
     <label for="selectDT">Example select</label>
     <select *ngIf="response.selectoptiontype" class="form-control" id="selectDT" name="selectDT" [(ngModel)]="mainCont.selectDT" >
       <option *ngFor="let dt of response.selectoptiontype" 
-       [value]="dt.Id" >{{dt.Name}}</option>  
+       [value]="dt.Id" >{{dt.name}}</option>  
     </select>
+    <div *ngIf="errormsg">
+      {{errormsg}}
+    </div>
   </div>
   <div class="form-group">
     <label for="state">Example multiple select</label>
